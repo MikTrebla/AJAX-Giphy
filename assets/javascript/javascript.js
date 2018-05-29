@@ -21,7 +21,7 @@ $(document).ready(function () {
     $('#add-animal').on('click', function(event) {
         event.preventDefault();
         var newAnimal = $('#new-animal').val().trim();
-        //prevent empty buttons form being created
+        //prevent empty buttons from being created
         if (newAnimal === ''){
             return false;
         }
@@ -46,13 +46,15 @@ $(document).ready(function () {
             // $('#show-gifs').empty(); 
             for (var i =0; i < results.length; i++) {
                 var newDiv = $('<div class = "col-md-4">');
+                var downloadLink = $('<a>').text('Download GIF');
+                downloadLink.attr('href', results[i].images.fixed_height.url).attr('download', results[i].images.fixed_height.url);
                 var p = $('<p>').html('Title: ' + results[i].title  + '</br>Rating : '+ results[i].rating  );
                 var newGif = $('<img>').attr('src', results[i].images.fixed_height_still.url);
                 newGif.attr('data-still', results[i].images.fixed_height_still.url).attr('data-animated', results[i].images.fixed_height.url).attr('data-state', 'still').addClass('gif');
-                newDiv.append(newGif, p);
+                newDiv.append(newGif, p, downloadLink);
                 $('#show-gifs').prepend(newDiv);
             }
-            // renderButtons();
+            renderButtons();
         });
     };
 
@@ -68,6 +70,10 @@ $(document).ready(function () {
         }
     });
   
+
+
+
+   
 
 });
 
